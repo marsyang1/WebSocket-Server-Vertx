@@ -25,7 +25,7 @@ public class MonitorHandler {
         // get topic and rm the
         String topic = params.getOrDefault(Constants.DEFAULT_TOPIC_KEY, Constants.DEFAULT_TOPIC);
         if (params.containsKey(Constants.DEFAULT_TOPIC_KEY)) params.remove(Constants.DEFAULT_TOPIC_KEY);
-        Consumer consumer = new Consumer(vertx, routingContext.request().upgrade(), topic, params);
+        Consumer consumer = new Consumer(vertx, routingContext.request().toWebSocket().result(), topic, params);
         consumer.onOpen().onConsume();
 
     }

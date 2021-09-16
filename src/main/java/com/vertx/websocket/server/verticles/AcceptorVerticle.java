@@ -18,46 +18,46 @@ import org.slf4j.LoggerFactory;
  */
 public class AcceptorVerticle extends AbstractVerticle {
 
-    private Logger log = LoggerFactory.getLogger(AcceptorVerticle.class);
+  private final Logger log = LoggerFactory.getLogger(AcceptorVerticle.class);
 
-    private static final String SERVER_PATH_MONITOR = "/iov/websocket/monitor";
-    private static final String SERVER_PATH_ACCESS = "/iov/websocket/access";
-    private static final String SERVER_PATH_MAINTAIN = "/iov/websocket/maintain";
+  private static final String SERVER_PATH_MONITOR = "/iov/websocket/monitor";
+  private static final String SERVER_PATH_ACCESS = "/iov/websocket/access";
+  private static final String SERVER_PATH_MAINTAIN = "/iov/websocket/maintain";
 
-    @Override
-    public void start() throws Exception {
+  @Override
+  public void start() throws Exception {
 
-        String serverHost = config().getString("serverHost");
-        Integer serverPort = config().getInteger("serverPort");
+    String serverHost = config().getString("serverHost");
+    Integer serverPort = config().getInteger("serverPort");
 
-        HttpServer httpServer = vertx.createHttpServer();
+    HttpServer httpServer = vertx.createHttpServer();
 
-        Router router = Router.router(vertx);
+    Router router = Router.router(vertx);
 
-        // cross-domain
-        router.route().handler(BodyHandler.create());
-        CorsHandler corsHandler = CorsHandler.create("*");
-        corsHandler.allowedMethod(HttpMethod.GET);
-        corsHandler.allowedMethod(HttpMethod.POST);
-        corsHandler.allowedMethod(HttpMethod.PUT);
-        corsHandler.allowedMethod(HttpMethod.DELETE);
-        corsHandler.allowedHeader("Authorization");
-        corsHandler.allowedHeader("Content-Type");
-        corsHandler.allowedHeader("Access-Control-Allow-Origin");
-        corsHandler.allowedHeader("Access-Control-Allow-Headers");
-        router.route().handler(corsHandler);
+    // cross-domain
+    router.route().handler(BodyHandler.create());
+    CorsHandler corsHandler = CorsHandler.create("*");
+    corsHandler.allowedMethod(HttpMethod.GET);
+    corsHandler.allowedMethod(HttpMethod.POST);
+    corsHandler.allowedMethod(HttpMethod.PUT);
+    corsHandler.allowedMethod(HttpMethod.DELETE);
+    corsHandler.allowedHeader("Authorization");
+    corsHandler.allowedHeader("Content-Type");
+    corsHandler.allowedHeader("Access-Control-Allow-Origin");
+    corsHandler.allowedHeader("Access-Control-Allow-Headers");
+    router.route().handler(corsHandler);
 
-        AccessHandler accessHandler = new AccessHandler(vertx);
-        MonitorHandler monitorHandler = new MonitorHandler(vertx);
-        MaintainHandler maintainHandler = new MaintainHandler(vertx);
+    AccessHandler accessHandler = new AccessHandler(vertx);
+    MonitorHandler monitorHandler = new MonitorHandler(vertx);
+    MaintainHandler maintainHandler = new MaintainHandler(vertx);
 
-        router.route(SERVER_PATH_ACCESS).handler(accessHandler::handle);
-        router.route(SERVER_PATH_MONITOR).handler(monitorHandler::handle);
-        router.route(SERVER_PATH_MAINTAIN).handler(maintainHandler::handle);
+    router.route(SERVER_PATH_ACCESS).handler(accessHandler::handle);
+    router.route(SERVER_PATH_MONITOR).handler(monitorHandler::handle);
+    router.route(SERVER_PATH_MAINTAIN).handler(maintainHandler::handle);
 
 
-        httpServer.requestHandler(router::accept).listen(serverPort);
+    httpServer.requestHandler(router).listen(serverPort);
 
-        log.info("AcceptorVerticle is ready, Listening host: {}, port: {}", serverHost, serverPort);
-    }
+    log.info("AcceptorVerticle is ready, Listening host: {}, port: {}", serverHost, serverPort);
+  }
 }

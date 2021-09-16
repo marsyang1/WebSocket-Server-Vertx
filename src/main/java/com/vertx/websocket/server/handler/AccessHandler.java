@@ -16,19 +16,19 @@ import java.util.stream.Stream;
  */
 public class AccessHandler {
 
-    private Vertx vertx;
+  private Vertx vertx;
 
-    public AccessHandler(Vertx vertx) {
-        this.vertx = vertx;
-    }
+  public AccessHandler(Vertx vertx) {
+    this.vertx = vertx;
+  }
 
-    public void handle(RoutingContext routingContext) {
-        // get topic form request
-        String topicInfo = routingContext.request().getParam(Constants.DEFAULT_TOPIC_KEY);
-        String[] topicArray = Objects.isNull(topicInfo) ? Constants.DEFAULT_TOPIC_LIST : topicInfo.trim().split(",");
+  public void handle(RoutingContext routingContext) {
+    // get topic form request
+    String topicInfo = routingContext.request().getParam(Constants.DEFAULT_TOPIC_KEY);
+    String[] topicArray = Objects.isNull(topicInfo) ? Constants.DEFAULT_TOPIC_LIST : topicInfo.trim().split(",");
 
-        Producer producer = new Producer(vertx, routingContext.request().upgrade(), Stream.of(topicArray).collect(Collectors.toList()));
-        producer.onOpen().access();
-    }
+    Producer producer = new Producer(vertx, routingContext.request().toWebSocket().result(), Stream.of(topicArray).collect(Collectors.toList()));
+    producer.onOpen().access();
+  }
 
 }
