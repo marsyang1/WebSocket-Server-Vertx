@@ -1,6 +1,5 @@
 package com.vertx.websocket.server.verticles;
 
-
 import com.vertx.websocket.server.handler.AccessHandler;
 import com.vertx.websocket.server.handler.MaintainHandler;
 import com.vertx.websocket.server.handler.MonitorHandler;
@@ -13,9 +12,7 @@ import io.vertx.ext.web.handler.CorsHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Created by jiancai.wang on 2017/4/19.
- */
+/** Created by jiancai.wang on 2017/4/19. */
 public class AcceptorVerticle extends AbstractVerticle {
 
   private final Logger log = LoggerFactory.getLogger(AcceptorVerticle.class);
@@ -54,7 +51,6 @@ public class AcceptorVerticle extends AbstractVerticle {
     router.route(SERVER_PATH_ACCESS).handler(accessHandler::handle);
     router.route(SERVER_PATH_MONITOR).handler(monitorHandler::handle);
     router.route(SERVER_PATH_MAINTAIN).handler(maintainHandler::handle);
-
 
     httpServer.requestHandler(router).listen(serverPort);
 

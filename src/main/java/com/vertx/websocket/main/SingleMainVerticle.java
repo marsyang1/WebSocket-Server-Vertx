@@ -1,5 +1,7 @@
 package com.vertx.websocket.main;
 
+import static com.vertx.websocket.server.util.PropertiesUtil.loadProperties;
+
 import com.vertx.websocket.server.verticles.AcceptorVerticle;
 import com.vertx.websocket.server.verticles.HeartbeatVerticle;
 import io.vertx.core.AbstractVerticle;
@@ -7,8 +9,6 @@ import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
 import lombok.extern.slf4j.Slf4j;
-
-import static com.vertx.websocket.server.util.PropertiesUtil.loadProperties;
 
 /**
  * 參考文件 https://devcenter.heroku.com/articles/websocket-security#validate-client-input When the
