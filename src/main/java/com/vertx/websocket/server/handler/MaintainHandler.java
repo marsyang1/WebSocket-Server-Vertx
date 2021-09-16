@@ -6,24 +6,22 @@ import io.vertx.core.http.ServerWebSocket;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.dropwizard.MetricsService;
 import io.vertx.ext.web.RoutingContext;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 用于监控页面的
  *
  * <p>Created by jiancai.wang on 2017/4/22.
  */
+@RequiredArgsConstructor
 public class MaintainHandler {
 
-  private Vertx vertx;
+  private final Vertx vertx;
   private long periodicId;
-
-  public MaintainHandler(Vertx vertx) {
-    this.vertx = vertx;
-  }
 
   public void handle(RoutingContext routingContext) {
 
-    /**
+    /*
      * 需要暴露什么 1. cluster info: server list 2. 发布订阅的info: topic list、sender list、consumer list 3.
      * 发送消息数据和接受消息数
      */

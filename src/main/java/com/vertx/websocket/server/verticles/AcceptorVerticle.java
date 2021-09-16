@@ -9,13 +9,11 @@ import io.vertx.core.http.HttpServer;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.CorsHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 /** Created by jiancai.wang on 2017/4/19. */
+@Slf4j
 public class AcceptorVerticle extends AbstractVerticle {
-
-  private final Logger log = LoggerFactory.getLogger(AcceptorVerticle.class);
 
   private static final String SERVER_PATH_MONITOR = "/iov/websocket/monitor";
   private static final String SERVER_PATH_ACCESS = "/iov/websocket/access";

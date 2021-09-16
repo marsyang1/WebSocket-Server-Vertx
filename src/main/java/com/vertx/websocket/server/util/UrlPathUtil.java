@@ -1,9 +1,12 @@
 package com.vertx.websocket.server.util;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /** Created by jiancai.wang on 2017/6/27. */
+@UtilityClass
 public class UrlPathUtil {
 
   public static Map<String, String> paresParams(String query) {

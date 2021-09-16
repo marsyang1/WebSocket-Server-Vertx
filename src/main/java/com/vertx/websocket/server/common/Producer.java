@@ -2,29 +2,27 @@ package com.vertx.websocket.server.common;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.http.ServerWebSocket;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /** Created by jiancai.wang on 2017/4/20. */
+@Slf4j
 public class Producer implements Serializable {
 
-  private Logger log = LoggerFactory.getLogger(Producer.class);
-  //
-  private Vertx vertx;
-  //
-  private ServerWebSocket webSocket;
-  // 标识符
-  private String name;
+  private final Vertx vertx;
+  private final ServerWebSocket webSocket;
   // 消息主题
-  private List<String> topicList;
+  private final List<String> topicList;
+  // 标识符
+  private final String name;
   // 上线时间
-  private Date timestamp;
+  private final Date timestamp;
   // 发送消息计数器
   public final AtomicLong receivedMsgCounter = new AtomicLong(0);
 

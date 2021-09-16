@@ -1,13 +1,16 @@
 package com.vertx.websocket.server.util;
 
 import io.vertx.core.json.JsonObject;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import lombok.experimental.UtilityClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
 /** Created by jiancai.wang on 2017/5/24. */
+@UtilityClass
 public class PropertiesUtil {
 
   private static final Logger log = LoggerFactory.getLogger(PropertiesUtil.class);

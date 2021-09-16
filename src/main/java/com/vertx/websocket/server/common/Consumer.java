@@ -4,36 +4,36 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.MessageConsumer;
 import io.vertx.core.http.ServerWebSocket;
 import io.vertx.core.json.JsonObject;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 用于数据消费，在数据推送前做相关的过滤或加工
  *
  * <p>Created by jiancai.wang on 2016/11/28.
  */
+@Slf4j
 public class Consumer implements Serializable {
 
   /** 消费者可以拥有多个Topic, Purchaser会将消费者加到不同主题的Group中 */
-  private Logger log = LoggerFactory.getLogger(Producer.class);
   //
-  private Vertx vertx;
+  private final Vertx vertx;
   //
-  private ServerWebSocket webSocket;
+  private final ServerWebSocket webSocket;
   // 标识符
-  private String name;
+  private final String name;
   // 消息主题
-  private String topic;
+  private final String topic;
   // 消息过滤条件
-  private Map<String, String> filters;
+  private final Map<String, String> filters;
   // 上线时间
-  private Date timestamp;
+  private final Date timestamp;
   // 发送消息计数器
   private final AtomicLong receivedMsgCounter = new AtomicLong(0);
   //

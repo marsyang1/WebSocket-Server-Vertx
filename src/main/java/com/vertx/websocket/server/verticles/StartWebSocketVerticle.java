@@ -1,19 +1,19 @@
 package com.vertx.websocket.server.verticles;
 
-import static com.vertx.websocket.server.util.PropertiesUtil.loadProperties;
-
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Objects;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import static com.vertx.websocket.server.util.PropertiesUtil.loadProperties;
 
 /** Created by jiancai.wang on 2017/5/10. */
+@Slf4j
 public class StartWebSocketVerticle extends AbstractVerticle {
 
-  private static final Logger log = LoggerFactory.getLogger(StartWebSocketVerticle.class);
   private static final String DEFAULT_CONFIG_RES = "configs/default-websocket.json";
 
   @Override

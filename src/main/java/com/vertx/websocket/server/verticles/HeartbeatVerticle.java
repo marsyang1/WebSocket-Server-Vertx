@@ -4,14 +4,14 @@ import com.vertx.websocket.server.common.Constants;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.client.WebClient;
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Date;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /** Created by jiancai.wang on 2017/5/9. */
+@Slf4j
 public class HeartbeatVerticle extends AbstractVerticle {
 
-  private static final Logger log = LoggerFactory.getLogger(HeartbeatVerticle.class);
   private static volatile boolean CONSOLE_CONNECT_FLAG = true;
 
   @Override
